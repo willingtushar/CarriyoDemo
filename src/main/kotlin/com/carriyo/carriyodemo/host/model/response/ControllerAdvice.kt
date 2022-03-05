@@ -3,6 +3,7 @@ package com.carriyo.carriyodemo.host.model.response
 import com.carriyo.carriyodemo.utils.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.converter.HttpMessageNotReadableException
+import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -40,6 +41,14 @@ class ControllerAdvice {
     fun handleDeserializationException(exception: HttpMessageNotReadableException): ErrorResponse{
         val errorCode = ""
         val errorResponse = ErrorData(exception.message, errorCode)
+        return ErrorResponse(errorResponse)
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException::class)
+    @ResponseStatus(value= HttpStatus.BAD_REQUEST)
+    fun handleDeserializationException(exception: MethodArgumentNotValidException): ErrorResponse{
+        val errorCode = ""
+        val errorResponse = ErrorData(exception.fieldError?.defaultMessage, errorCode)
         return ErrorResponse(errorResponse)
     }
 

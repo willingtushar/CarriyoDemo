@@ -8,10 +8,13 @@ import com.carriyo.carriyodemo.host.model.request.user.User
 import com.carriyo.carriyodemo.host.model.response.SuccessResponse
 import com.carriyo.carriyodemo.host.model.response.user.DeleteUserResponse
 import org.springframework.http.HttpStatus
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping(v1BaseUrl)
+@Validated
 class UserController(
     private val userServices: UserServices
 ) {
@@ -25,7 +28,7 @@ class UserController(
 
     @PostMapping("/user")
     fun addUser(
-        @RequestBody addUserRequest: Request<User>
+        @Valid @RequestBody addUserRequest: Request<User>
     ): SuccessResponse<User> {
         val response = userServices.addUser(addUserRequest.data)
         return SuccessResponse(response)
@@ -33,18 +36,18 @@ class UserController(
 
     @PutMapping("/user")
     fun updateUser(
-        @RequestBody updateUserRequest: Request<User>
+        @Valid @RequestBody updateUserRequest: Request<User>
     ): SuccessResponse<User> {
         val response = userServices.updateUser(updateUserRequest.data)
         return SuccessResponse(response)
     }
 
-    @DeleteMapping("/user/{mobileNumber}")
+    @DeleteMapping("/user/{userId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     fun deleteUser(
-        @PathVariable mobileNumber: String
+        @PathVariable userId: String
     ): SuccessResponse<DeleteUserResponse> {
-        userServices.deleteUser(mobileNumber)
+        userServices.deleteUser(userId)
         return SuccessResponse(DeleteUserResponse(userDeletedMessage))
     }
 }
