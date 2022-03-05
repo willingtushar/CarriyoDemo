@@ -25,7 +25,8 @@ class ControllerAdvice {
         MultipleCommunicationAddressException::class,
         MissingCommunicationAddressTagException::class,
         MultipleWorkAddressException::class,
-        MultipleHomeAddressException::class
+        MultipleHomeAddressException::class,
+        MissingUserIdInUpdateRequest::class
     )
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     fun handleValidationException(exception: ValidationException): ErrorResponse {
@@ -52,6 +53,7 @@ class ControllerAdvice {
         "missingCommunicationTag" to "CR202",
         "oneThanOneCommunicationTag" to "CR203",
         "multipleWorkAddress" to "CR204",
-        "multipleHomeAddress" to "CR205"
+        "multipleHomeAddress" to "CR205",
+        "missingUserId" to "CR206"
     )
 }

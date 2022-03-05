@@ -7,3 +7,4 @@ class MultipleCommunicationAddressException : ValidationException("Only one addr
 class MultipleHomeAddressException : ValidationException("Multiple home address in the request", "multipleHomeAddress")
 class MultipleWorkAddressException : ValidationException("Multiple work address in the request", "multipleWorkAddress")
 
+class MissingUserIdInUpdateRequest : ValidationException("User id is mandatory in update request", "missingUserId")

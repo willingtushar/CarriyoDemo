@@ -1,9 +1,9 @@
 package com.carriyo.carriyodemo.core.userService.translators
 
-import com.carriyo.carriyodemo.adapter.database.model.AddressDTO
-import com.carriyo.carriyodemo.adapter.database.model.AddressTagDTO
-import com.carriyo.carriyodemo.adapter.database.model.MobileNumberDTO
-import com.carriyo.carriyodemo.adapter.database.model.UserDTO
+import com.carriyo.carriyodemo.adapter.repository.model.AddressDTO
+import com.carriyo.carriyodemo.adapter.repository.model.AddressTagDTO
+import com.carriyo.carriyodemo.adapter.repository.model.MobileNumberDTO
+import com.carriyo.carriyodemo.adapter.repository.model.UserDTO
 import com.carriyo.carriyodemo.host.model.request.user.Address
 import com.carriyo.carriyodemo.host.model.request.user.AddressTag
 import com.carriyo.carriyodemo.host.model.request.user.MobileNumber
@@ -12,6 +12,7 @@ import com.carriyo.carriyodemo.host.model.request.user.User
 object ResponseTranslator {
     fun toModel(userDto: UserDTO): User {
         return User(
+            userId = userDto.userId,
             firstName = userDto.firstName,
             lastName = userDto.lastName,
             email = userDto.email,

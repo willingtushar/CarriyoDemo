@@ -1,4 +1,4 @@
-package com.carriyo.carriyodemo.adapter.database.model
+package com.carriyo.carriyodemo.adapter.repository.model
 
 data class MobileNumberDTO(
     val countryCode: String,

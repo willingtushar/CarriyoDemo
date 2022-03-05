@@ -1,4 +1,4 @@
-package com.carriyo.carriyodemo.adapter.database.model
+package com.carriyo.carriyodemo.adapter.repository.model
 
 enum class AddressTagDTO{
     COMMUNICATION,

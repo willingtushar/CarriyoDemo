@@ -1,4 +1,4 @@
-package com.carriyo.carriyodemo.adapter.database.model
+package com.carriyo.carriyodemo.adapter.repository.model
 
 data class AddressDTO (
     val addressLine1: String,

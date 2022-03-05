@@ -1,29 +1,31 @@
 package com.carriyo.carriyodemo.core.userService.translators
 
-import com.carriyo.carriyodemo.adapter.database.model.AddressDTO
-import com.carriyo.carriyodemo.adapter.database.model.AddressTagDTO
-import com.carriyo.carriyodemo.adapter.database.model.MobileNumberDTO
-import com.carriyo.carriyodemo.adapter.database.model.UserDTO
+import com.carriyo.carriyodemo.adapter.repository.model.AddressDTO
+import com.carriyo.carriyodemo.adapter.repository.model.AddressTagDTO
+import com.carriyo.carriyodemo.adapter.repository.model.MobileNumberDTO
+import com.carriyo.carriyodemo.adapter.repository.model.UserDTO
 import com.carriyo.carriyodemo.host.model.request.user.Address
 import com.carriyo.carriyodemo.host.model.request.user.AddressTag
 import com.carriyo.carriyodemo.host.model.request.user.MobileNumber
 import com.carriyo.carriyodemo.host.model.request.user.User
-import com.carriyo.carriyodemo.utils.MissingCommunicationAddressTagException
-import com.carriyo.carriyodemo.utils.MultipleCommunicationAddressException
-import com.carriyo.carriyodemo.utils.MultipleHomeAddressException
-import com.carriyo.carriyodemo.utils.MultipleWorkAddressException
+import com.carriyo.carriyodemo.utils.*
+import java.util.*
 
 object RequestTranslator {
     fun validateAndTranslate(user: User): UserDTO{
-        // todo: validations are remaining
-
         return UserDTO(
+            userId = user.userId ?: UUID.randomUUID().toString(),
             firstName = user.firstName,
             lastName = user.lastName,
             email = user.email,
             mobileNumber = getMobileNumber(user.mobileNumber),
             addresses = getAddresses(user.addresses)
         )
+    }
+
+    fun checkForUserId(user: User){
+        if(user.userId.isNullOrEmpty())
+            throw MissingUserIdInUpdateRequest()
     }
 
     private fun getAddresses(addresses: List<Address>): List<AddressDTO> {

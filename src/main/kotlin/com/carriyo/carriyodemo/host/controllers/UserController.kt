@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.*
 class UserController(
     private val userServices: UserServices
 ) {
-    @GetMapping("/user/{mobileNumber}")
+    @GetMapping("/user/{userId}")
     fun getUser(
-        @PathVariable mobileNumber: String
+        @PathVariable userId: String
     ): SuccessResponse<User> {
-        val response = userServices.getUser(mobileNumber)
+        val response = userServices.getUser(userId)
         return SuccessResponse(response)
     }
 
