@@ -8,6 +8,10 @@ import com.carriyo.carriyodemo.host.model.request.user.Address
 import com.carriyo.carriyodemo.host.model.request.user.AddressTag
 import com.carriyo.carriyodemo.host.model.request.user.MobileNumber
 import com.carriyo.carriyodemo.host.model.request.user.User
+import com.carriyo.carriyodemo.utils.MissingCommunicationAddressTagException
+import com.carriyo.carriyodemo.utils.MultipleCommunicationAddressException
+import com.carriyo.carriyodemo.utils.MultipleHomeAddressException
+import com.carriyo.carriyodemo.utils.MultipleWorkAddressException
 
 object RequestTranslator {
     fun validateAndTranslate(user: User): UserDTO{
@@ -22,12 +26,36 @@ object RequestTranslator {
         )
     }
 
-    private fun getAddresses(address: List<Address>): List<AddressDTO> {
+    private fun getAddresses(addresses: List<Address>): List<AddressDTO> {
+        validateAddresses(addresses)
         val addressDtos = mutableListOf<AddressDTO>()
-        address.forEach {
+        addresses.forEach {
             addressDtos.add(getAddress(it))
         }
         return addressDtos
+    }
+
+    private fun validateAddresses(addresses: List<Address>) {
+        if (isCommunicationAddressMissing(addresses)) {
+            throw MissingCommunicationAddressTagException()
+        }
+        if (hasMultipleAddressesFor(addresses, AddressTag.COMMUNICATION)) {
+            throw MultipleCommunicationAddressException()
+        }
+        if (hasMultipleAddressesFor(addresses, AddressTag.WORK)) {
+            throw MultipleWorkAddressException()
+        }
+        if (hasMultipleAddressesFor(addresses, AddressTag.HOME)) {
+            throw MultipleHomeAddressException()
+        }
+    }
+
+    private fun hasMultipleAddressesFor(addresses: List<Address>, addressTag: AddressTag): Boolean {
+        return addresses.filter { it.addressTags.contains(addressTag) }.size > 1
+    }
+
+    private fun isCommunicationAddressMissing(addresses: List<Address>): Boolean {
+        return addresses.none { it.addressTags.contains(AddressTag.COMMUNICATION) }
     }
 
     private fun getAddress(address: Address): AddressDTO {

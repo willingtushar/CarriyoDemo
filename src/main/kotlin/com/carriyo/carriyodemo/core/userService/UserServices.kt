@@ -8,8 +8,9 @@ import com.carriyo.carriyodemo.core.userService.translators.RequestTranslator.va
 import com.carriyo.carriyodemo.core.userService.translators.ResponseTranslator.toModel
 import com.carriyo.carriyodemo.host.model.request.user.User
 import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 
-@Component
+@Service
 class UserServices(
     val userRepository: UserRepository
 ) : UserService {

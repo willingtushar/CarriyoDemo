@@ -2,7 +2,7 @@ package com.carriyo.carriyodemo.adapter.database
 
 import com.carriyo.carriyodemo.adapter.database.interfaces.UserRepository
 import com.carriyo.carriyodemo.adapter.database.model.UserDTO
-import com.carriyo.carriyodemo.utils.UserAlreadyExisted
+import com.carriyo.carriyodemo.utils.UserAlreadyExistedException
 import com.carriyo.carriyodemo.utils.UserNotFoundException
 import org.springframework.stereotype.Repository
 
@@ -22,7 +22,7 @@ class MockUserRepository : UserRepository {
             it.mobileNumber.number == user.mobileNumber.number
         }
         if(userEntryInDB != null)
-            throw UserAlreadyExisted()
+            throw UserAlreadyExistedException()
 
         userList.add(user)
         return user

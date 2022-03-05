@@ -1,7 +1,7 @@
 package com.carriyo.carriyodemo.host.model.response
 
 data class ErrorData(
-    val errorDescription: String,
+    val errorDescription: String?,
     val errorCode: String,
-    val additionalData: Any
+    val additionalData: Any? = null
 )
