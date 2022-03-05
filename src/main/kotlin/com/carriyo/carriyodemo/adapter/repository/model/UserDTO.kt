@@ -1,7 +1,5 @@
 package com.carriyo.carriyodemo.adapter.repository.model
 
-import java.util.*
-
 data class UserDTO(
     val userId: String,
     val firstName: String,
