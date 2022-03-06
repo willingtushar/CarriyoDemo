@@ -1,15 +1,36 @@
 package com.carriyo.carriyodemo.adapter.repository.model
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument
+
+@DynamoDBDocument
 data class AddressDTO (
-    val addressLine1: String,
-    val addressLine2: String?,
-    val addressLine3: String?,
-    val landmark: String?,
-    val postalCode: String,
-    val city: String,
-    val state: String,
-    val country: String,
-    val addressTags: List<AddressTagDTO>
+    @DynamoDBAttribute
+    var addressLine1: String = "",
+
+    @DynamoDBAttribute
+    var addressLine2: String? = null,
+
+    @DynamoDBAttribute
+    var addressLine3: String? = null,
+
+    @DynamoDBAttribute
+    var landmark: String? = null,
+
+    @DynamoDBAttribute
+    var postalCode: String = "",
+
+    @DynamoDBAttribute
+    var city: String = "",
+
+    @DynamoDBAttribute
+    var state: String = "",
+
+    @DynamoDBAttribute
+    var country: String = "",
+
+    @DynamoDBAttribute
+    var addressTags: List<AddressTagDTO> = emptyList()
 )
 
 

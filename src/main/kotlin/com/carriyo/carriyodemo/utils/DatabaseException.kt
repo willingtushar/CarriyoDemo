@@ -5,3 +5,4 @@ abstract class DatabaseException(override val message: String, open val fieldNam
 class UserNotFoundException : DatabaseException("No user is found in the database", "userNotFound")
 class UserAlreadyExistedException : DatabaseException("User already existed in the database", "userAlreadyExisted")
 
+class DynamoDBInternalServerException: DatabaseException("Internal server error", "internalServerError")

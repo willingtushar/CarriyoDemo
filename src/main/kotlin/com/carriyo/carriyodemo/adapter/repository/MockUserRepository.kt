@@ -6,7 +6,6 @@ import com.carriyo.carriyodemo.utils.UserAlreadyExistedException
 import com.carriyo.carriyodemo.utils.UserNotFoundException
 import org.springframework.stereotype.Repository
 
-@Repository
 class MockUserRepository : UserRepository {
     private val userList : MutableList<UserDTO> = mutableListOf()
 

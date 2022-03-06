@@ -1,6 +1,13 @@
 package com.carriyo.carriyodemo.adapter.repository.model
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument
+
+@DynamoDBDocument
 data class MobileNumberDTO(
-    val countryCode: String,
-    val number: String
+    @DynamoDBAttribute
+    var countryCode: String = "",
+
+    @DynamoDBAttribute
+    var number: String = ""
 )

@@ -23,6 +23,16 @@ class ControllerAdvice {
     }
 
     @ExceptionHandler(
+        DynamoDBInternalServerException::class
+    )
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    fun handleDatabaseInteractionException(exception: DynamoDBInternalServerException): ErrorResponse {
+        val errorCode = errorCodeFor(exception.fieldName)
+        val errorResponse = ErrorData(exception.message, errorCode)
+        return ErrorResponse(errorResponse)
+    }
+
+    @ExceptionHandler(
         MultipleCommunicationAddressException::class,
         MissingCommunicationAddressTagException::class,
         MultipleWorkAddressException::class,

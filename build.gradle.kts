@@ -20,8 +20,9 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation("aws.sdk.kotlin:dynamodb:0.9.4-beta")
+	implementation("com.amazonaws:aws-java-sdk-dynamodb:1.12.167")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+	implementation("org.projectlombok:lombok:1.18.20")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
