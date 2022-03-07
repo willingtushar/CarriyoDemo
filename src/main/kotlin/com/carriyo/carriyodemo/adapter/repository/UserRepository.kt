@@ -4,6 +4,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBSaveExpression
 import com.amazonaws.services.dynamodbv2.model.AttributeValue
 import com.amazonaws.services.dynamodbv2.model.ExpectedAttributeValue
+import com.carriyo.carriyodemo.adapter.repository.config.ESClient
 import com.carriyo.carriyodemo.adapter.repository.interfaces.UserRepository
 import com.carriyo.carriyodemo.adapter.repository.model.UserDTO
 import com.carriyo.carriyodemo.utils.DynamoDBInternalServerException
@@ -17,11 +18,14 @@ class UserRepository:  UserRepository{
     private val dynamoDBMapper: DynamoDBMapper? = null
 
     override fun getUser(userId: String): UserDTO {
-        return try{
-            getUserFromElasticSearch(userId)
-        }catch(e: Exception){
-            getUserFromDynamoDB(userId)
-        }
+        return getUserFromElasticSearch(userId)
+
+//        return try{
+//            getUserFromElasticSearch(userId)
+//        }
+//        catch(e: Exception){
+//            getUserFromDynamoDB(userId)
+//        }
     }
 
     override fun addUser(user: UserDTO): UserDTO {
@@ -89,6 +93,6 @@ class UserRepository:  UserRepository{
         }
     }
     private fun getUserFromElasticSearch(userId: String): UserDTO {
-        throw NotImplementedError()
+        return ESClient.getUser(userId)
     }
 }

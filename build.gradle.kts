@@ -23,6 +23,7 @@ dependencies {
 	implementation("com.amazonaws:aws-java-sdk-dynamodb:1.12.167")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.projectlombok:lombok:1.18.20")
+	implementation("org.opensearch.client:opensearch-rest-high-level-client:1.2.4")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
